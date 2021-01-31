@@ -68,7 +68,11 @@ public void onActivityResult(int requestCode, int resultCode,
                 uri = resultData.getData();
                 DocumentFile foo = DocumentFile.fromTreeUri(this, uri);
                 DocumentFile[] files = foo.listFiles();
-                DocumentFile video1 = files[0];
+                int index = 0;
+                while (files[index].getName().indexOf(".mp4") == -1) {
+                    index++;
+                }
+                DocumentFile video1 = files[index];
                 Uri chosenUri = video1.getUri();
                 String fullFilePath = UriUtils.getPathFromUri(this,chosenUri);
                 String newFilePath = fullFilePath.replaceAll(".mp4","foo.mp4");
@@ -111,7 +115,7 @@ public void onActivityResult(int requestCode, int resultCode,
        public void onCancelled() {
          // On Cancelled
        }
- }, VideoQuality.VERY_LOW, false, false);
+ }, VideoQuality.MEDIUM, false, false);
 
 
 
@@ -126,6 +130,7 @@ public void onActivityResult(int requestCode, int resultCode,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivityForResult(intent, 1);
