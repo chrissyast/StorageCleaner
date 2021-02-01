@@ -35,10 +35,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity{
 
-    LocationManager locationManager;
-    LocationListener locationListener;
-    private SensorManager sensorManager;
-    private Sensor temp;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -49,10 +45,6 @@ public class MainActivity extends AppCompatActivity{
             }
         }
     }
-
-    private void handleLocationGranted() {
-    }
-
 
 
     @Override
